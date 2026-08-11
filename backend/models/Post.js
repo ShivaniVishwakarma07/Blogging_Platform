@@ -1,25 +1,22 @@
 const mongoose = require("mongoose");
 
-const userSchema = new mongoose.Schema(
+const postSchema = new mongoose.Schema(
   {
-    name: {
+    title: {
       type: String,
       required: true,
       trim: true,
     },
 
-    email: {
+    content: {
       type: String,
       required: true,
-      unique: true,
-      lowercase: true,
-      trim: true,
     },
 
-    password: {
-      type: String,
+    author: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
       required: true,
-      minlength: 6,
     },
   },
   {
@@ -27,4 +24,4 @@ const userSchema = new mongoose.Schema(
   },
 );
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model("Post", postSchema);
