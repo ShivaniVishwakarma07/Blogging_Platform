@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -8,14 +9,16 @@ import EditPost from "./pages/EditPost";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/posts/:id" element={<PostDetails />} />
-      <Route path="/create-post" element={<CreatePost />} />
-      <Route path="/edit-post/:id" element={<EditPost />} />
-    </Routes>
+    <Layout>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/posts/:id" element={<PostDetails />} />
+        <Route path="/create-post" element={<CreatePost />} />
+        <Route path="/edit-post/:id" element={<EditPost />} />
+      </Routes>
+    </Layout>
   );
 }
 
