@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
+import ProtectedRoute from "./components/ProtectedRoute";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -15,11 +16,15 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/posts/:id" element={<PostDetails />} />
-        <Route path="/create-post" element={<CreatePost />} />
-        <Route path="/edit-post/:id" element={<EditPost />} />
+
+        <Route element={<ProtectedRoute />}>
+          <Route path="/create-post" element={<CreatePost />} />
+          <Route path="/edit-post/:id" element={<EditPost />} />
+        </Route>
       </Routes>
     </Layout>
   );
 }
 
 export default App;
+0000000000;
