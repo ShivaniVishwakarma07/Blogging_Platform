@@ -1,3 +1,4 @@
+import Comments from "../components/Comments";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import api from "../services/api";
@@ -116,7 +117,7 @@ function PostDetails() {
                 </button>
               </div>
             )}
-
+            <Comments postId={post._id} />
             <Link to="/" className="btn btn-link mt-3 px-0">
               ← Back to Posts
             </Link>
