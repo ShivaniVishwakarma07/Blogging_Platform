@@ -10,6 +10,11 @@ const createPost = async (req, res) => {
         message: "Title and content are required",
       });
     }
+    if (!title?.trim() || !content?.trim()) {
+      return res.status(400).json({
+        message: "Title and content are required.",
+      });
+    }
 
     const post = await Post.create({
       title,
@@ -123,6 +128,12 @@ const updatePost = async (req, res) => {
     if (post.author.toString() !== req.userId.toString()) {
       return res.status(403).json({
         message: "You can only edit your own posts",
+      });
+    }
+
+    if (!title?.trim() || !content?.trim()) {
+      return res.status(400).json({
+        message: "Title and content are required.",
       });
     }
 

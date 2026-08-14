@@ -136,6 +136,12 @@ const deleteComment = async (req, res) => {
     }
 
     // Check ownership
+    if (post.author.toString() !== req.user._id.toString()) {
+      return res.status(403).json({
+        message: "You are not allowed to delete this post.",
+      });
+    }
+
     if (comment.author.toString() !== req.userId.toString()) {
       return res.status(403).json({
         message: "You can only delete your own comments",
