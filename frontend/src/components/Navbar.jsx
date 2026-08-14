@@ -4,6 +4,10 @@ import { useAuth } from "../context/AuthContext";
 function Navbar() {
   const { user, logout } = useAuth();
 
+  const handleLogout = () => {
+    logout();
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
       <div className="container">
@@ -21,13 +25,17 @@ function Navbar() {
               <Link to="/profile" className="nav-link text-white">
                 Profile
               </Link>
+
               <Link to="/create-post" className="btn btn-light btn-sm px-3">
                 Write
               </Link>
 
               <span className="text-white">Hi, {user.name}</span>
 
-              <button className="btn btn-outline-light btn-sm" onClick={logout}>
+              <button
+                className="btn btn-outline-light btn-sm"
+                onClick={handleLogout}
+              >
                 Logout
               </button>
             </>

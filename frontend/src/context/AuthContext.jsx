@@ -7,38 +7,38 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const checkAuth = async () => {
-    try {
-      const response = await api.get("/auth/me");
-      setUser(response.data.user);
-    } catch (error) {
-      setUser(null);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const logout = async () => {
-    try {
-      await api.post("/auth/logout");
-      setUser(null);
-    } catch (error) {
-      console.error("Logout error:", error.message);
-    }
-  };
-
   useEffect(() => {
-    checkAuth();
+    const storedUser = localStorage.getItem("user");
+
+    if (storedUser) {
+      try {
+        const parsedUser = JSON.parse(storedUser);
+        setUser(parsedUser);
+      } catch {
+        localStorage.removeItem("user");
+      }
+    }
+
+    setLoading(false);
   }, []);
+
+  const login = (userData) => {
+    localStorage.setItem("user", JSON.stringify(userData));
+    setUser(userData);
+  };
+
+  const logout = () => {
+    localStorage.removeItem("user");
+    setUser(null);
+  };
 
   return (
     <AuthContext.Provider
       value={{
         user,
-        setUser,
         loading,
+        login,
         logout,
-        checkAuth,
       }}
     >
       {children}
