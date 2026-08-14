@@ -1,9 +1,31 @@
 body {
   margin: 0;
-  background: #f8f9fa;
-  font-family: Arial, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f8f9fa;
 }
 
 a {
   text-decoration: none;
+}
+
+.home-subtitle {
+  max-width: 650px;
+}
+
+.post-card {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.post-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.1) !important;
+}
+
+.empty-state {
+  padding: 60px 20px;
+  border: 1px dashed #ced4da;
+  border-radius: 12px;
+  background: #ffffff;
 }

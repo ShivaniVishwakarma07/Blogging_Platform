@@ -64,7 +64,6 @@ function Home() {
 
   const handlePageChange = (page) => {
     const params = {};
-
     const currentSearch = searchParams.get("search");
 
     if (currentSearch) {
@@ -78,35 +77,52 @@ function Home() {
 
   return (
     <div>
-      <div className="text-center mb-5">
-        <h1 className="display-5 fw-bold">Discover Great Stories</h1>
+      <section className="text-center py-5 mb-4">
+        <span className="badge bg-dark mb-3 px-3 py-2">
+          Welcome to BlogSpace
+        </span>
 
-        <p className="text-muted">
-          Read, write and share your ideas with the community.
+        <h1 className="display-4 fw-bold mb-3">
+          Discover Ideas.
+          <br />
+          Share Your Story.
+        </h1>
+
+        <p className="lead text-muted mx-auto home-subtitle">
+          A simple space to read interesting stories, share your thoughts, and
+          connect through ideas.
         </p>
-      </div>
 
-      <form onSubmit={handleSearch} className="row justify-content-center mb-5">
-        <div className="col-md-8">
-          <div className="input-group">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Search posts..."
-              value={search}
-              onChange={(event) => setSearch(event.target.value)}
-            />
+        <Link to="/create-post" className="btn btn-dark px-4 py-2 mt-3">
+          Start Writing
+        </Link>
+      </section>
 
-            <button className="btn btn-dark" type="submit">
-              Search
-            </button>
+      <section className="mb-5">
+        <form onSubmit={handleSearch} className="row justify-content-center">
+          <div className="col-md-8 col-lg-7">
+            <div className="input-group input-group-lg shadow-sm">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Search articles..."
+                value={search}
+                onChange={(event) => setSearch(event.target.value)}
+              />
+
+              <button className="btn btn-dark px-4" type="submit">
+                Search
+              </button>
+            </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </section>
 
       {loading && (
         <div className="text-center py-5">
           <div className="spinner-border" role="status"></div>
+
+          <p className="text-muted mt-3">Loading posts...</p>
         </div>
       )}
 
@@ -114,23 +130,52 @@ function Home() {
 
       {!loading && !error && posts.length === 0 && (
         <div className="text-center py-5">
-          <h4>No posts found</h4>
-          <p className="text-muted">Try searching for something else.</p>
+          <div className="empty-state">
+            <h4>No posts found</h4>
+
+            <p className="text-muted mb-3">
+              Try searching with a different keyword.
+            </p>
+
+            <button
+              className="btn btn-outline-dark"
+              onClick={() => {
+                setSearch("");
+                setSearchParams({ page: 1 });
+              }}
+            >
+              View All Posts
+            </button>
+          </div>
         </div>
       )}
 
       {!loading && !error && posts.length > 0 && (
         <>
+          <div className="d-flex justify-content-between align-items-center mb-4">
+            <div>
+              <h2 className="fw-bold mb-1">Latest Stories</h2>
+
+              <p className="text-muted mb-0">Explore our latest articles.</p>
+            </div>
+          </div>
+
           <div className="row g-4">
             {posts.map((post) => (
               <div className="col-md-6 col-lg-4" key={post._id}>
-                <div className="card h-100 shadow-sm border-0">
-                  <div className="card-body d-flex flex-column">
-                    <h5 className="card-title">{post.title}</h5>
+                <article className="card h-100 border-0 shadow-sm post-card">
+                  <div className="card-body p-4 d-flex flex-column">
+                    <div className="mb-3">
+                      <span className="badge text-bg-light border">
+                        Article
+                      </span>
+                    </div>
 
-                    <p className="text-muted small mb-2">
+                    <h5 className="card-title fw-bold mb-2">{post.title}</h5>
+
+                    <div className="small text-muted mb-3">
                       By {post.author?.name || "Unknown"}
-                    </p>
+                    </div>
 
                     <p className="card-text text-muted">
                       {post.content.length > 150
@@ -142,10 +187,10 @@ function Home() {
                       to={`/posts/${post._id}`}
                       className="btn btn-outline-dark mt-auto"
                     >
-                      Read More
+                      Read Article →
                     </Link>
                   </div>
-                </div>
+                </article>
               </div>
             ))}
           </div>

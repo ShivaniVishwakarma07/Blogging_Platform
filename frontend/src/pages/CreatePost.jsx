@@ -49,9 +49,13 @@ function CreatePost() {
   return (
     <div className="row justify-content-center">
       <div className="col-lg-8">
-        <div className="card shadow-sm border-0">
+        <div className="card border-0 shadow-sm">
           <div className="card-body p-4">
-            <h2 className="mb-4">Create a New Post</h2>
+            <h2 className="fw-bold mb-2">Create a New Post</h2>
+
+            <p className="text-muted mb-4">
+              Share your thoughts and ideas with the community.
+            </p>
 
             {error && <div className="alert alert-danger">{error}</div>}
 

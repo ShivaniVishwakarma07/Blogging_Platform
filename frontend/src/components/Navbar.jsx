@@ -5,24 +5,24 @@ function Navbar() {
   const { user, logout } = useAuth();
 
   return (
-    <nav className="navbar navbar-expand-lg bg-dark navbar-dark">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
       <div className="container">
-        <Link className="navbar-brand fw-bold" to="/">
+        <Link to="/" className="navbar-brand fw-bold fs-4">
           BlogSpace
         </Link>
 
         <div className="d-flex align-items-center gap-3">
-          <Link className="nav-link text-white" to="/">
+          <Link to="/" className="nav-link text-white">
             Home
           </Link>
 
           {user ? (
             <>
-              <Link className="nav-link text-white" to="/create-post">
+              <Link to="/create-post" className="btn btn-light btn-sm px-3">
                 Write
               </Link>
 
-              <span className="text-white">{user.name}</span>
+              <span className="text-white">Hi, {user.name}</span>
 
               <button className="btn btn-outline-light btn-sm" onClick={logout}>
                 Logout
@@ -30,11 +30,11 @@ function Navbar() {
             </>
           ) : (
             <>
-              <Link className="nav-link text-white" to="/login">
+              <Link to="/login" className="nav-link text-white">
                 Login
               </Link>
 
-              <Link className="btn btn-light btn-sm" to="/register">
+              <Link to="/register" className="btn btn-light btn-sm px-3">
                 Register
               </Link>
             </>

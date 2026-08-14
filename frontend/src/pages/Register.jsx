@@ -63,7 +63,11 @@ function Register() {
       <div className="col-md-6 col-lg-5">
         <div className="card shadow-sm border-0">
           <div className="card-body p-4">
-            <h2 className="text-center mb-4">Create Account</h2>
+            <h2 className="text-center fw-bold mb-2">Create Your Account</h2>
+
+            <p className="text-center text-muted mb-4">
+              Join the BlogSpace community.
+            </p>
 
             {error && <div className="alert alert-danger">{error}</div>}
 

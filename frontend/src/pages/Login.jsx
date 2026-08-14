@@ -53,7 +53,11 @@ function Login() {
       <div className="col-md-6 col-lg-5">
         <div className="card shadow-sm border-0">
           <div className="card-body p-4">
-            <h2 className="text-center mb-4">Welcome Back</h2>
+            <h2 className="text-center fw-bold mb-2">Welcome Back</h2>
+
+            <p className="text-center text-muted mb-4">
+              Login to continue to BlogSpace.
+            </p>
 
             {error && <div className="alert alert-danger">{error}</div>}
 
