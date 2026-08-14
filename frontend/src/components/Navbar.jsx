@@ -18,6 +18,9 @@ function Navbar() {
 
           {user ? (
             <>
+              <Link to="/profile" className="nav-link text-white">
+                Profile
+              </Link>
               <Link to="/create-post" className="btn btn-light btn-sm px-3">
                 Write
               </Link>

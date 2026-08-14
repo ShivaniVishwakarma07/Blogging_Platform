@@ -7,6 +7,7 @@ import Register from "./pages/Register";
 import PostDetails from "./pages/PostDetails";
 import CreatePost from "./pages/CreatePost";
 import EditPost from "./pages/EditPost";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="/create-post" element={<CreatePost />} />
           <Route path="/edit-post/:id" element={<EditPost />} />
+          <Route path="/profile" element={<Profile />} />
         </Route>
       </Routes>
     </Layout>
@@ -27,4 +29,3 @@ function App() {
 }
 
 export default App;
-0000000000;
