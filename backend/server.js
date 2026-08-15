@@ -16,7 +16,10 @@ connectDB();
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://blogspace.vercel.app"],
+    origin: [
+      "http://localhost:5173",
+      "https://blogging-platform-one-rho.vercel.app",
+    ],
     credentials: true,
   }),
 );
