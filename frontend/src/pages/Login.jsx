@@ -12,8 +12,6 @@ function Login() {
 
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
-  const { setUser } = useAuth();
   const navigate = useNavigate();
 
   const handleChange = (event) => {
@@ -38,7 +36,7 @@ function Login() {
 
       const response = await api.post("/auth/login", formData);
 
-      setUser(response.data.user);
+      login(response.data.user);
       navigate("/");
     } catch (error) {
       setError(
