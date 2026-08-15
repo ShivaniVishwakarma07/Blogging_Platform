@@ -232,5 +232,6 @@ function Comments({ postId }) {
     </section>
   );
 }
+<p>this is a test comment</p>;
 
 export default Comments;
