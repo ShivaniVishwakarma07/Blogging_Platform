@@ -19,32 +19,33 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/posts/:id" element={<PostDetails />} />
 
-        <Route element={<ProtectedRoute />}>
-          <Route
-            path="/create-post"
-            element={
-              <ProtectedRoute>
-                <CreatePost />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/edit-post/:id"
-            element={
-              <ProtectedRoute>
-                <EditPost />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/profile"
-            element={
-              <ProtectedRoute>
-                <Profile />
-              </ProtectedRoute>
-            }
-          />
-        </Route>
+        <Route
+          path="/create-post"
+          element={
+            <ProtectedRoute>
+              <CreatePost />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/edit-post/:id"
+          element={
+            <ProtectedRoute>
+              <EditPost />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
+
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Layout>
