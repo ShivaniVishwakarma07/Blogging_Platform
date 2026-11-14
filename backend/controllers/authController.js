@@ -7,15 +7,17 @@ const registerUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
-    // Check if all fields are provided
     if (!name || !email || !password) {
       return res.status(400).json({
         message: "All fields are required",
       });
     }
 
-    // Check if user already exists
-    const existingUser = await User.findOne({ email });
+    const normalizedEmail = email.trim().toLowerCase();
+
+    const existingUser = await User.findOne({
+      email: normalizedEmail,
+    });
 
     if (existingUser) {
       return res.status(400).json({
@@ -23,13 +25,11 @@ const registerUser = async (req, res) => {
       });
     }
 
-    // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create user
     const user = await User.create({
       name,
-      email,
+      email: normalizedEmail,
       password: hashedPassword,
     });
 
@@ -55,15 +55,20 @@ const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // Check fields
     if (!email || !password) {
       return res.status(400).json({
         message: "Email and password are required",
       });
     }
 
-    // Find user
-    const user = await User.findOne({ email });
+    const normalizedEmail = email.trim().toLowerCase();
+
+    const user = await User.findOne({
+      email: normalizedEmail,
+    });
+
+    console.log("Login email:", normalizedEmail);
+    console.log("User found:", !!user);
 
     if (!user) {
       return res.status(401).json({
@@ -71,8 +76,9 @@ const loginUser = async (req, res) => {
       });
     }
 
-    // Check password
     const isPasswordCorrect = await bcrypt.compare(password, user.password);
+
+    console.log("Password correct:", isPasswordCorrect);
 
     if (!isPasswordCorrect) {
       return res.status(401).json({
@@ -80,7 +86,6 @@ const loginUser = async (req, res) => {
       });
     }
 
-    // Create JWT
     const token = jwt.sign(
       {
         userId: user._id,
@@ -91,7 +96,6 @@ const loginUser = async (req, res) => {
       },
     );
 
-    // Send token in HTTP-only cookie
     res.cookie("token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
@@ -99,7 +103,7 @@ const loginUser = async (req, res) => {
       maxAge: 24 * 60 * 60 * 1000,
     });
 
-    res.status(200).json({
+    return res.status(200).json({
       message: "Login successful",
       user: {
         id: user._id,
@@ -110,7 +114,7 @@ const loginUser = async (req, res) => {
   } catch (error) {
     console.error("Login error:", error.message);
 
-    res.status(500).json({
+    return res.status(500).json({
       message: "Server error",
     });
   }
@@ -129,6 +133,7 @@ const logoutUser = (req, res) => {
   });
 };
 
+// Get current user
 const getCurrentUser = async (req, res) => {
   try {
     const user = await User.findById(req.userId).select("-password");
